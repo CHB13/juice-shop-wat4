@@ -27,7 +27,7 @@ function authHeaders (token: string) {
   }
 }
 
-// run in serial, since tests depend on each other
+// run interdependent tests in serial
 test.describe.serial('/api/BasketItems', () => {
   test('adds a product to the authenticated basket via API', async ({ request }) => {
     const { token, bid } = await loginAsJim(request)
