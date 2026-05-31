@@ -67,3 +67,10 @@ config/*.yml
 
 # System Files
 .DS_Store
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
