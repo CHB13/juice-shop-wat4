@@ -33,4 +33,24 @@ test.describe('shopping cart flow', () => {
     await expect(page.locator('mat-cell.mat-column-quantity .cell-initial-font').first()).toContainText('2')
     await expect(page.locator('#price')).toBeVisible()
   })
+
+  test('removes an item from the basket and the cart badge updates', async ({ page }) => {
+    await prepareAnonymousSession(page)
+
+    await page.goto('/#/search?q=Apple%20Juice')
+
+    const firstProduct = page.locator('app-product').first()
+    const addButton = firstProduct.getByRole('button', { name: /add to basket/i })
+    await addButton.click()
+
+    await expect(page.locator('.warn-notification')).toHaveText('1')
+
+    await page.getByRole('button', { name: /show the shopping cart/i }).click()
+    await expect(page.getByRole('heading', { name: /basket/i })).toBeVisible()
+
+    await page.locator('mat-cell.mat-column-remove button').first().click()
+
+    await expect(page.locator('mat-row')).toHaveCount(0)
+    await expect(page.locator('.warn-notification')).toHaveText('0')
+  })
 })
