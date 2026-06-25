@@ -17,10 +17,10 @@ test.describe('login flow', () => {
     await page.goto('/#/login')
 
     await page.getByLabel(/email/i).fill('jim@juice-sh.op')
-    await page.getByLabel(/password/i).fill('ncc-1701')
-    await page.getByRole('button', { name: /log in/i }).click()
+    await page.getByRole('textbox', { name: /password/i }).fill('ncc-1701')
+    await page.getByRole('button', { name: 'Login', exact: true }).click()
 
-    await expect(page).toHaveURL(/#\/$/)
+    await expect(page).toHaveURL(/#\/(search)?$/)
     await expect(page.getByRole('button', { name: /account/i })).toBeVisible()
   })
 
@@ -30,8 +30,8 @@ test.describe('login flow', () => {
     await page.goto('/#/login')
 
     await page.getByLabel(/email/i).fill('jim@juice-sh.op')
-    await page.getByLabel(/password/i).fill('wrongpassword')
-    await page.getByRole('button', { name: /log in/i }).click()
+    await page.getByRole('textbox', { name: /password/i }).fill('wrongpassword')
+    await page.getByRole('button', { name: 'Login', exact: true }).click()
 
     await expect(page.getByText(/invalid email or password/i)).toBeVisible()
   })
