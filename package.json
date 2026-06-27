@@ -71,6 +71,7 @@
     "test:api": "node --import ./test/api/helpers/test-env.mjs --import tsx --test --test-force-exit \"test/api/**/*.test.ts\"",
     "test:api:coverage": "nyc --report-dir=./coverage/api-tests npm run test:api",
     "test:product-search:k6": "k6 run test/load/k6/products-search.js",
+    "test:place-order:k6": "k6 run test/load/k6/place-order.js",
     "test:e2e": "npm run cypress:run",
     "rsn": "tsx rsn/rsn.ts",
     "rsn:update": "tsx rsn/rsn-update.ts",
